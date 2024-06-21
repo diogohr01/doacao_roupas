@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class UserCreateListView(generics.ListCreateAPIView):
-    permission_classes = (IsAuthenticated,)
+    #permission_classes = (IsAuthenticated,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
     
@@ -14,7 +14,10 @@ class UserCreateListView(generics.ListCreateAPIView):
 
     
 class UserRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsAuthenticated,)
+    #permission_classes = (IsAuthenticated,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    
+
+#oi mauricio
    
