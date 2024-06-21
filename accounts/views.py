@@ -20,4 +20,4 @@ class UserRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     
 
 #oi mauricio
-   
+#oi diogo
