@@ -14,28 +14,42 @@ class UserSerializer(serializers.ModelSerializer):
     def validate(self, data):
         senha = data.get('senha')
         confirm_senha = data.get('confirm_senha')
+        name = data.get('name')
         
         if senha and confirm_senha and senha != confirm_senha:
             raise serializers.ValidationError("As senhas não coincidem.")
         elif len(senha) < 8:
             raise serializers.ValidationError("Senha precisa ter mais de 8 caracteres")
-        
+        elif User.objects.filter(name=name).exists():
+            raise serializers.ValidationError({'non_field_errors': 'Já existe usuário com esse nome.'})
+
+        user = User.objects.get(name=data.get('name'))
+        if not user.check_senha(senha):
+            raise serializers.ValidationError({'detail': 'Senha inválida'})
         return data
+    
+    
 
     def create(self, validated_data):
-        validated_data.pop('confirm_senha') 
-        senha = validated_data.pop('senha').encode('utf-8')
-        salt = bcrypt.gensalt()  
-        hash_senha = bcrypt.hashpw(senha, salt).decode('utf-8')
-        validated_data['senha'] = hash_senha
+
+        validated_data.pop('confirm_senha')
         user = User.objects.create(**validated_data)
-        
+        senha = validated_data.pop('senha')
+        salt = bcrypt.gensalt()
+        hashed_senha = bcrypt.hashpw(senha.encode('utf-8'), salt)
+        user.senha = hashed_senha.decode('utf-8')
+        user.save()
+
         doador = validated_data.get('is_doador')
-        beneficiario = validated_data.get('is_beneficiario') 
-        
+        beneficiario = validated_data.get('is_beneficiario')
+
         if not doador and not beneficiario:
-            raise serializers.ValidationError("Você deve escolher pelo menos uma opção: doador ou beneficiário.")
+            raise serializers.ValidationError({'non_field_errors': 'Você deve escolher se você é doador ou beneficiário'})
         return user
+    
+    
+    
+    
 
     def update(self, instance, validated_data):
         if 'senha' in validated_data:
@@ -56,7 +70,18 @@ class UserSerializer(serializers.ModelSerializer):
     
     
     
-    
+class UserLoginSerializer(serializers.ModelSerializer):
+    senha = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = User
+        fields = ['name', 'senha']
+
+    def validate(self, data):
+        user = User.objects.get(name=data.get('name'))
+        if not user.check_senha(data.get('senha')):
+            raise serializers.ValidationError({'detail': 'Senha inválida'})
+        return data    
     
     
     

@@ -44,8 +44,10 @@ INSTALLED_APPS = [
     'point',
     'rest_framework_simplejwt',
     'corsheaders',
-
+    'authentication',  # <-- Certifique-se de adicionar uma vírgula aqui para separar corretamente os aplicativos
+    'rest_framework.authtoken',  # <-- Adicione o rest_framework.authtoken separado por vírgula
 ]
+
 
 
 MIDDLEWARE = [
@@ -57,7 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
+
     
 ]
 
@@ -139,6 +141,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        
     )
     
 }
@@ -156,5 +159,8 @@ CORS_ORIGIN_WHITELIST = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  
-    'http://127.0.0.1:3000',# or your actual frontend URL
+    'http://127.0.0.1:3000',
+    "http://localhost:3001",  
+    'http://127.0.0.1:3001',
 ]
+
