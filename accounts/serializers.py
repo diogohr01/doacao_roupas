@@ -26,6 +26,8 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.get(name=data.get('name'))
         if not user.check_senha(senha):
             raise serializers.ValidationError({'detail': 'Senha inválida'})
+        if user.name == name:
+            raise serializers.ValidationError({'name': 'Usuário não encontrado'})
         return data
     
     

@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'point',
     'rest_framework_simplejwt',
     'corsheaders',
-    'authentication',  # <-- Certifique-se de adicionar uma vírgula aqui para separar corretamente os aplicativos
-    'rest_framework.authtoken',  # <-- Adicione o rest_framework.authtoken separado por vírgula
+    'authentication',  
+    'rest_framework.authtoken',  
     'donation'
 ]
 

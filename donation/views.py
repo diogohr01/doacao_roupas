@@ -10,15 +10,16 @@ from donation.serializers import AgendamentoDoacaoSerializer
 
 # Create your views here.
 class DonationCreateListView(generics.ListCreateAPIView):
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
+    #authentication_classes = (TokenAuthentication,)
+    #permission_classes = (IsAuthenticated,)
     queryset = AgendamentoDoacao.objects.all()
     serializer_class = AgendamentoDoacaoSerializer
     
     
     
 class DonationRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
+   # authentication_classes = (TokenAuthentication,)
+   # permission_classes = (IsAuthenticated,)
     queryset = AgendamentoDoacao.objects.all()
     serializer_class = AgendamentoDoacaoSerializer
+    

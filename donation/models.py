@@ -14,3 +14,6 @@ class AgendamentoDoacao(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='agendado')
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
+    
+    
+    
