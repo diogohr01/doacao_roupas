@@ -10,15 +10,15 @@ from point.serializers import PontoColetaSerializer
 
 # Create your views here.
 class PointCreateListView(generics.ListCreateAPIView):
-    #authentication_classes = (TokenAuthentication,)
-    #permission_classes = (IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
     queryset = PontoColeta.objects.all()
     serializer_class = PontoColetaSerializer
     
     
     
 class PointRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-    #authentication_classes = (TokenAuthentication,)
-    #permission_classes = (IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
     queryset = PontoColeta.objects.all()
     serializer_class = PontoColetaSerializer

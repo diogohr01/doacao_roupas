@@ -23,13 +23,25 @@ class UserSerializer(serializers.ModelSerializer):
         elif User.objects.filter(name=name).exists():
             raise serializers.ValidationError({'non_field_errors': 'Já existe usuário com esse nome.'})
 
-        user = User.objects.get(name=data.get('name'))
-        if not user.check_senha(senha):
-            raise serializers.ValidationError({'detail': 'Senha inválida'})
-        if user.name == name:
-            raise serializers.ValidationError({'name': 'Usuário não encontrado'})
+
+        #user = User.objects.get(name=data.get('name'))
+        #if not user.check_senha(senha):
+        #    raise serializers.ValidationError({'detail': 'Senha inválida'})
+        #if user.name == name:
+        #    raise serializers.ValidationError({'name': 'Usuário não encontrado'})
         return data
     
+    def get_user_by_name(self, name):
+        try:
+            return User.objects.get(name=name)
+        except User.DoesNotExist:
+            raise serializers.ValidationError({'name': 'Usuário não encontrado.'})
+    
+    def get_user_by_senha(self, senha):
+        try:
+            return User.objects.get(senha=senha)
+        except User.DoesNotExist:
+            raise serializers.ValidationError({'senha': 'Senha inválida.'})
     
 
     def create(self, validated_data):

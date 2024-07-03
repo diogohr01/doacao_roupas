@@ -17,6 +17,11 @@ class AgendamentoDoacaoSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         doador = validated_data.pop('doador')
         ponto_coleta = validated_data.pop('ponto_coleta')
+        
         agendamento_doacao = AgendamentoDoacao.objects.create(doador=doador, ponto_coleta=ponto_coleta, **validated_data)
+        
     
         return agendamento_doacao
+    
+    
+        
