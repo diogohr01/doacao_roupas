@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'authentication',  # <-- Certifique-se de adicionar uma vírgula aqui para separar corretamente os aplicativos
     'rest_framework.authtoken',  # <-- Adicione o rest_framework.authtoken separado por vírgula
-    'donation'
+    'donation',
+    'feedback'
 ]
 
 

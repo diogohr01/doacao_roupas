@@ -4,7 +4,7 @@ from catalog.models import CatalogoRoupas
 class CatalogoRoupasSerializer(serializers.ModelSerializer):
     class Meta:
         model = CatalogoRoupas
-        fields = ['tipo', 'tamanho', 'condicao', 'quantidade']
+        fields = ['id','tipo', 'tamanho', 'condicao', 'quantidade']
 
     def create(self, validated_data):
         tipo = validated_data.get('tipo')

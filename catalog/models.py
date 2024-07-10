@@ -19,4 +19,4 @@ class CatalogoRoupas(models.Model):
     quantidade = models.IntegerField()  # quantidade de roupas disponíveis
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
-
+    

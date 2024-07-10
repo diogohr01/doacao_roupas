@@ -24,4 +24,5 @@ urlpatterns = [
     path('api/v1/', include('catalog.urls')),
     path('api/v1/', include('point.urls')),
     path('api/v1/', include('donation.urls')),
+    path('api/v1/', include('feedback.urls'))
 ]
